@@ -1,0 +1,1051 @@
+<meta content="width=device-width, initial-scale=1" name="viewport">
+
+	<style>
+	@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+
+
+
+body{
+	margin: 0;
+	font-size: 16px;
+	background-color: #FFFFFF;
+	font-family: 'Montserrat', sans-serif;
+	font-weight: 400;
+}
+
+*{
+	box-sizing: border-box;
+	margin:0;
+	padding:0;
+	outline: none;
+}
+
+.custom-box{
+	max-width: 700px;
+	background-color: #ffffff;
+	margin:40px auto;
+	padding: 30px;
+	border-radius: 10px;
+	animation: fadeInRight 1s ease;
+}
+@keyframes fadeInRight{
+	0%{
+		transform: translateX(40px);
+		opacity:0;
+	}
+	100%{
+	  transform: translateX(0px);	
+	  opacity:1;
+	}
+}
+.custom-box::before,
+.custom-box::after{
+	content: '';
+	clear: both;
+	display: table;
+}
+.custom-box.hide{
+	display: none;
+}
+
+.home-box h3{
+	font-size: 18px;
+	color:#000000;
+	font-weight: 500;
+	margin-bottom: 15px;
+	line-height: 25px;
+}
+
+.home-box p{
+	font-size: 16px;
+	margin-bottom: 10px;
+	line-height: 22px;
+	color:#000000;
+	font-weight: 400;
+}
+.home-box p span{
+	font-weight: 500;
+}
+.home-box .btn{
+  margin-top: 20px;
+}
+.btn{
+	padding: 15px 45px;
+	background-color: #009688;
+	color:#ffffff;
+	border:none;
+	border-radius: 5px;
+	font-family: 'Montserrat', sans-serif;
+	font-size: 16px;
+	cursor: pointer;
+	display: inline-block;
+}
+
+.quiz-box .question-number,
+.quiz-box .question-text,
+.quiz-box .option-container,
+.quiz-box .next-question-btn,
+.quiz-box .answers-indicator{
+   width: 100%;
+   float: left;
+}
+.quiz-box .question-number{
+	font-size: 18px;
+	color:#009688;
+	font-weight: 600;
+	border-bottom:1px solid #cccccc;
+	padding-bottom: 10px;
+	line-height: 25px
+}
+.quiz-box .question-text{
+	font-size: 22px;
+	color:#000000;
+	line-height: 28px;
+	font-weight: 400;
+	padding: 20px 0;
+	margin:0;
+}
+
+.quiz-box .option-container .option{
+	background-color: #cccccc;
+	padding:13px 15px;
+	font-size: 16px;
+	line-height: 22px;
+	color:#000000;
+	border-radius: 5px;
+	margin-bottom: 10px;
+	cursor: pointer;
+	text-transform: capitalize;
+	opacity:0;
+	animation: fadeIn 0.3s ease forwards;
+	position: relative;
+	overflow:hidden;
+}
+.quiz-box .option-container .option.already-answered{
+	pointer-events: none;
+}
+@keyframes fadeIn{
+	0%{
+		opacity:0;
+	}
+	100%{
+		opacity: 1;
+	}
+}
+.quiz-box .option-container .option.correct::before{
+ content: '';
+ position: absolute;
+ left:0;
+ top:0;
+ height: 100%;
+ width: 100%;
+ background-color: green;
+ z-index: -1;
+ animation: slideInLeft .5s ease forwards
+}
+@keyframes slideInLeft{
+	0%{
+		transform: translateX(-100%);
+	}
+	100%{
+	 transform: translateX(0%);	
+	}
+}
+.quiz-box .option-container .option.wrong::before{
+ content: '';
+ position: absolute;
+ left:0;
+ top:0;
+ height: 100%;
+ width: 100%;
+ background-color: red;
+ z-index: -1;
+ animation: slideInLeft .5s ease forwards
+}
+.quiz-box .option-container .option.wrong{
+	color:#ffffff;
+}
+.quiz-box .option-container .option.correct{
+	color:#ffffff;
+}
+.quiz-box .btn{
+	margin:15px 0;
+}
+.quiz-box .answers-indicator{
+	border-top: 1px solid #cccccc;
+}
+.quiz-box .answers-indicator div{
+	height: 40px;
+	width: 40px;
+	display: inline-block;
+	background-color: #cccccc;
+	border-radius: 50%;
+	margin-right: 3px;
+	margin-top: 15px;
+}
+.quiz-box .answers-indicator div.correct{
+	background-color: green;
+	background-image: url("../img/correct.png");
+	background-size: 50%;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+.quiz-box .answers-indicator div.wrong{
+	background-color: red;
+	background-image: url("../img/wrong.png");
+	background-size: 50%;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+.result-box{
+	text-align: center;
+}
+.result-box.hide{
+	display: none;
+}
+
+.result-box h1{
+	font-size: 36px;
+	line-height: 42px;
+	color:#009688;
+}
+.result-box table{
+	width: 100%;
+	border-collapse: collapse;
+	margin:30px 0;
+}
+.result-box table td{
+	border:1px solid #cccccc;
+	padding:8px 15px;
+	font-weight: 500;
+	color:#000000;
+	width: 50%;
+	text-align: left;
+	font-size: 18px;
+}
+.result-box .btn{
+	margin-right: 20px;
+}
+
+
+@media(max-width: 767px){
+	.result-box .btn{
+		margin-bottom: 15px;
+	}
+	body{
+		padding: 15px;
+	}
+}
+
+	</style>
+
+
+
+
+
+  <div class="home-box custom-box">
+      <h3>Instruction:</h3>
+      <p>Total number of questions: <span class="total-question"></span></p>
+      <button class="btn" onclick="startQuiz()" type="button">Start Quiz</button>
+  </div>
+
+  <div class="quiz-box custom-box hide">
+      <div class="question-number">
+          
+      </div>
+      <div class="question-text">
+         
+      </div>
+      <div class="option-container">
+          
+      </div>
+      <div class="next-question-btn">
+         <button class="btn" onclick="next()" type="button">Next</button>
+      </div>
+      <div class="answers-indicator">
+        
+      </div>
+  </div>
+
+  <div class="result-box custom-box hide">
+      <h2>Quiz Result</h2>
+      <table>
+         <tbody><tr>
+             <td>Total Question</td>
+             <td><span class="total-question"></span></td>
+         </tr>
+         <tr>
+             <td>Attempt</td>
+             <td><span class="total-attempt"></span></td>
+         </tr>
+         <tr>
+             <td>Correct</td>
+             <td><span class="total-correct"></span></td>
+         </tr>
+         <tr>
+             <td>Wrong</td>
+             <td><span class="total-wrong"></span></td>
+         </tr>
+         <tr>
+             <td>Percentage</td>
+             <td><span class="percentage"></span></td>
+         </tr>
+         <tr>
+             <td>Your Total Score</td>
+             <td><span class="total-score"></span></td>
+         </tr>
+      </tbody></table>
+      <button class="btn" onclick="tryAgainQuiz()" type="button">Try Again</button>
+      <button class="btn" onclick="goToHome()" type="button">Go To Home</button>
+  </div>
+
+<script>
+  
+
+    // Question Setup
+ // Array of Objects
+ const quiz = [
+    {
+           q:" Which type of metal screws useful for self tapping on hard or brittle materials? | कठ&#2379;र य&#2366; भ&#2306;ग&#2369;र स&#2366;मग&#2381;र&#2368; पर स&#2381;व-ट&#2376;प&#2367;&#2306;ग क&#2375; ल&#2367;ए क&#2367;स प&#2381;रक&#2366;र क&#2375; म&#2375;टल स&#2381;क&#2381;र&#2370;स उपय&#2379;ग&#2368; ह&#2376;? ",
+           options:["A) Self piercing | स&#2375;ल&#2381;फ प&#2367;एर&#2381;स&#2367;&#2306;ग ","B) Thread cutting | थ&#2381;र&#2375;ड कट&#2367;&#2306;ग ","C)Thread forming | थ&#2381;र&#2375;ड फ&#2379;र&#2381;म&#2367;&#2306;ग ","D) Hammer driven screw | ह&#2376;मर ड&#2381;र&#2367;व&#2375;न स&#2381;क&#2381;र&#2370;"],
+           answer:1,
+           
+       },
+       {
+           q:" What is the advantage of wing nut? | व&#2367;&#2306;ग नट&#2381;स क&#2366; उपय&#2379;ग कह&#2366;&#2306; क&#2367;य&#2366; ज&#2366;त&#2366; ह&#2376;?",
+           options:["A) In coach building work | क&#2379;च न&#2367;र&#2381;म&#2366;ण क&#2366;र&#2381;य म&#2375;&#2306; ","B)Heavy duty assembly work | भ&#2366;र&#2368; क&#2381;षमत&#2366; व&#2366;ल&#2375; अस&#2375;&#2306;बल&#2368; क&#2366;र&#2381;य म&#2375; ","C) Loosen and tighten without wrench | ढ&#2368;ल&#2366; और कस क&#2379; र&#2367;&#2306;च क&#2375; ब&#2367;न&#2366; ","D) Provide decorative appearance | सज&#2366;वट&#2368; उपस&#2381;थ&#2367;त&#2367; प&#2381;रद&#2366;न करन&#2375; क&#2375; ल&#2367;ए"],
+           answer:2,
+           
+       },
+ {
+           q:"What is the purpose of thrust ball bearing? | थ&#2381;रस&#2381;ट ब&#2377;ल ब&#2367;यर&#2367;&#2306;ग क&#2366; उद&#2381;द&#2375;श&#2381;य क&#2381;य&#2366; ह&#2376;?",
+           options:["A) Axial load | अक&#2381;ष&#2368;य ल&#2379;ड ","B) Radial load | र&#2375;ड&#2367;यल ल&#2379;ड ","C) Axial thrust load | अक&#2381;ष&#2368;य थ&#2381;रस&#2381;ट ल&#2379;ड ","D) Vertical thrust load | वर&#2381;ट&#2368;कल थ&#2381;रस&#2381;ट ल&#2379;ड"],
+           answer:3,
+           
+       },
+       {
+           q:"Which metal is used in electroplating to the metal surface to resist corrosion for long period and to retain high polish? | ल&#2306;ब&#2375; समय तक ज&#2306;ग न&#2366; लगन&#2375; द&#2375;न&#2366; और उच&#2381;च प&#2377;ल&#2367;श क&#2379; बन&#2366;ए रखन&#2375; क&#2375; ल&#2367;ए ध&#2366;त&#2369; क&#2368; सतह क&#2368; इल&#2375;क&#2381;ट&#2381;र&#2379;प&#2381;ल&#2375;ट&#2367;&#2306;ग म&#2375;&#2306; क&#2367;स ध&#2366;त&#2369; क&#2366; उपय&#2379;ग क&#2367;य&#2366; ज&#2366;त&#2366; ह&#2376;?",
+           options:["A) Lead | ल&#2368;ड ","B) Nickel | न&#2367;कल","C) Chromium | क&#2381;र&#2379;म&#2367;यम ","D) Aluminum | एल&#2381;य&#2369;म&#2368;न&#2367;यम"],
+           answer:3,
+           
+       },
+       {
+           q:"Which metal protects corrosion resistant and does not crack or peel off due to temperature variation on coating? | क&#2380;न स&#2368; ध&#2366;त&#2369; स&#2306;क&#2381;ष&#2366;रण प&#2381;रत&#2367;र&#2379;ध&#2368; क&#2368; रक&#2381;ष&#2366; करत&#2368; ह&#2376; और क&#2379;ट&#2367;&#2306;ग पर त&#2366;पम&#2366;न भ&#2367;न&#2381;नत&#2366; क&#2375; क&#2366;रण दर&#2366;र य&#2366; छ&#2368;लत&#2366; नह&#2368;&#2306; ह&#2376;?",
+           options:["A) Zinc I ज&#2367;&#2306;क ","B)  Nickel | न&#2367;कल ","C) Copper | त&#2366;&#2306;ब&#2366;  ","D) Chromium | क&#2381;र&#2379;म&#2367;यम "],
+           answer:0,
+           
+       },
+       {
+           q:"Which bearing material is used in connecting rod and electrical motors? | कन&#2375;क&#2381;ट&#2367;&#2306;ग र&#2377;ड और इल&#2375;क&#2381;ट&#2381;र&#2367;कल म&#2379;टर&#2381;स म&#2375;&#2306; क&#2380;न स&#2368; ब&#2367;यर&#2367;&#2306;ग स&#2366;मग&#2381;र&#2368; क&#2366; उपय&#2379;ग क&#2367;य&#2366; ज&#2366;त&#2366; ह&#2376;?",
+           options:["A) White metal | व&#2366;इट म&#2375;टल ","B) Sintered alloy | स&#2367;न&#2381;टर&#2381;ड अल&#2366;ई ","C) Sintered alloy | स&#2367;न&#2381;टर&#2381;ड अल&#2366;ई ","D) Copper lead alloy | क&#2377;पर ल&#2368;ड म&#2367;श&#2381;र ध&#2366;त&#2369;"],
+           answer:3,
+           
+       },
+       {
+           q:"What is the operation of a metal coated with other metal to obtain protecting surface? | रक&#2381;ष&#2366;त&#2381;मक सतह प&#2381;र&#2366;प&#2381;त करन&#2375; क&#2375; ल&#2367;ए अन&#2381;य ध&#2366;त&#2369; क&#2375; स&#2366;थ ल&#2375;प&#2367;त ध&#2366;त&#2369; क&#2375; स&#2306;च&#2366;लन क&#2381;य&#2366; ह&#2376;?",
+           options:["A) Cladding | क&#2381;ल&#2376;ड&#2367;&#2306;ग ","B) Galvanizing | ग&#2376;ल&#2381;वन&#2366;इज&#2367;&#2306;ग ","C) Cementation | स&#2368;मन&#2381;ट&#2375;श ","D) Electroplating | इल&#2375;क&#2381;ट&#2381;रप&#2381;ल&#2376;ट&#2367;&#2306;ग"],
+           answer:3,
+           
+       },
+       {
+           q:"What is the name of part marked 'X'? | 'X' क&#2375; र&#2370;प म&#2375; च&#2367;न&#2381;ह&#2367;त भ&#2366;ग क&#2366; न&#2366;म क&#2381;य&#2366; ह&#2376;?<br /><img src='https://1.bp.blogspot.com/-A91Rkv9daJ0/X4B376aJHSI/AAAAAAAAGkc/ND6YFm8JJjcqWSzKTFhRBkXlaQS-mbrEwCLcBGAsYHQ/s0/Shot%2B0046.png'>",
+           options:["A) Ball case | ब&#2377;ल क&#2375;स ","B) Inner race | इनर र&#2375;स ","C) outer race | आउटर र&#2375;स ","D) Ball separating gauge | ब&#2377;ल स&#2375;पर&#2376;ट&#2367;&#2306;ग ग&#2375;ज"],
+           answer:3,
+           
+       },
+       {
+           q:"Which metal powder is used in calorizing process to prevent corrosion? | ज&#2306;ग क&#2379; र&#2379;कन&#2375; क&#2375; ल&#2367;ए क&#2376;ल&#2379;र&#2366;इज&#2367;&#2306;ग प&#2381;रक&#2381;र&#2367;य&#2366; म&#2375;&#2306; क&#2367;स ध&#2366;त&#2369; क&#2375; प&#2366;उडर क&#2366; उपय&#2379;ग क&#2367;य&#2366; ज&#2366;त&#2366; ह&#2376;?",
+           options:["A) Zinc powder | ज&#2367;&#2306;क प&#2366;उडर ","B) Nickel powder | न&#2367;क&#2375;ल प&#2366;उडर ","C) Chromium powder | क&#2381;र&#2379;म&#2367;यम प&#2366;उडर ","D) Aluminum powder | एल&#2381;य&#2370;म&#2368;न&#2367;यम प&#2366;उडर"],
+           answer:3,
+           
+       },
+       {
+           q:"Which bearing material is used for light loading and low speed application? | ल&#2366;इट ल&#2379;ड&#2367;&#2306;ग और कम गत&#2367; क&#2375; एप&#2381;ल&#2368;क&#2375;शन क&#2375; ल&#2367;ए क&#2380;न स&#2368; ब&#2367;यर&#2367;&#2306;ग स&#2366;मग&#2381;र&#2368; क&#2366; उपय&#2379;ग क&#2367;य&#2366; ज&#2366;त&#2366; ह&#2376;?",
+           options:["A) Cast iron | क&#2366;स&#2381;ट आयरन ","B) Tin bronze | ट&#2367;न क&#2366;&#2306;स&#2381;य ","C)  Cadmium based alloy | क&#2376;डम&#2367;यम आध&#2366;र&#2367;त म&#2367;श&#2381;र ध&#2366;त&#2369; ","D) Copper and lead alloys | क&#2377;पर और ल&#2368;ड म&#2367;श&#2381;र"],
+           answer:0,
+           
+       },
+       {
+           q:"What is the temperature required to process the chromizing for prevention of corrosion? | ज&#2306;ग क&#2375; र&#2379;कथ&#2366;म क&#2375; ल&#2367;ए क&#2381;र&#2379;म&#2366;इज&#2367;&#2306;ग प&#2381;रक&#2381;र&#2367;य&#2366; क&#2375; ल&#2367;ए आवश&#2381;यक त&#2366;पम&#2366;न क&#2381;य&#2366; ह&#2376;?",
+           options:["A) 900 to 1100&#176;C","B) 1000 to 1100&#176;C","C) 1100 to 1200&#176;C ","D) 1300 to 1400&#176;C"],
+           answer:3,
+           
+       },
+       {
+           q:" Which metal has high resistance to chemical reaction? | क&#2367;स ध&#2366;त&#2369; म&#2375;&#2306; र&#2366;स&#2366;यन&#2367;क प&#2381;रत&#2367;क&#2381;र&#2367;य&#2366; क&#2375; ल&#2367;ए उच&#2381;च प&#2381;रत&#2367;र&#2379;ध (ह&#2366;ई र&#2375;ज&#2367;स&#2381;ट&#2375;&#2306;स) ह&#2379;त&#2366; ह&#2376;?",
+           options:["A) Lead | स&#2368;स&#2366; ","B) Nickel | न&#2367;कल ","C) Copper | त&#2366;&#2306;ब&#2366; ","D) Aluminum | एल&#2381;य&#2369;म&#2368;न&#2367;यम"],
+           answer:1,
+           
+       },
+       {
+           q:"What is the disadvantage of thrust ball bearing? | थ&#2381;रस&#2381;ट ब&#2377;ल ब&#2367;यर&#2367;&#2306;ग क&#2366; न&#2369;कस&#2366;न क&#2381;य&#2366; ह&#2376;?",
+           options:["A) Cannot take any radial load | क&#2379;ई भ&#2368; र&#2375;ड&#2367;यल ल&#2379;ड नह&#2368;&#2306; ल&#2375; सकत&#2366; ","B)  Cannot take horizontal end thrust | क&#2381;ष&#2376;त&#2367;ज ए&#2306;ड थ&#2381;रस&#2381;ट नह&#2368;&#2306; ल&#2375; सकत&#2375; ","C) Cannot take load on both directions | द&#2379;न&#2379;&#2306; द&#2367;श&#2366;ओ&#2306; म&#2375;&#2306; ल&#2379;ड नह&#2368;&#2306; ल&#2375; सकत&#2375; ","D) Cannot take any vertical thrust load | क&#2367;स&#2368; भ&#2368; ऊर&#2381;ध&#2381;व&#2366;धर थ&#2381;रस&#2381;ट भ&#2366;र क&#2379; नह&#2368;&#2306; ल&#2375; सकत&#2375;"],
+          answer:1,
+           
+       },
+       {
+           q:"What is the name of bearing? | इस ब&#2367;यर&#2367;&#2306;ग क&#2366; न&#2366;म क&#2381;य&#2366; ह&#2376;?<br /><img src='https://1.bp.blogspot.com/-TxlEwL-RQVw/X4B38wHwbbI/AAAAAAAAGks/NDw9hx1fvncmyqIpSqgA208DuL76xq4yACLcBGAsYHQ/s0/Shot%2B0050.png'>",
+           options:["A) Split bearing | स&#2381;प&#2367;ल&#2381;ट ब&#2367;यर&#2367;&#2306;ग ","B) Bush bearing | ब&#2369;श ब&#2367;यर&#2367;&#2306;ग ","C) Solid bearing | स&#2377;ल&#2367;ड ब&#2367;यर&#2367;&#2306;ग ","D) Journal bearing | जर&#2381;नल ब&#2368;यर&#2367;&#2306;ग"],
+           answer:1,
+           
+       },
+       {
+           q:"Which type of bearing used for very heavy radial load? | क&#2367;स प&#2381;रक&#2366;र क&#2366; ब&#2367;यर&#2367;&#2306;ग क&#2366; उपय&#2379;ग बह&#2369;त भ&#2366;र&#2368; र&#2375;ड&#2367;यल भ&#2366;र क&#2375; ल&#2367;ए क&#2367;य&#2366; ज&#2366;त&#2366; ह&#2376;?",
+           options:["A) Ball bearing | ब&#2377;ल ब&#2367;यर&#2367;&#2306;ग ","B) Bush bearing | ब&#2369;श ब&#2367;यर&#2367;&#2306;ग ","C) Needle bearing | न&#2368;डल ब&#2367;यर&#2367;&#2306;ग ","D) Double row roller bearing | डबल र&#2379; र&#2379;लर ब&#2367;यर&#2367;&#2306;ग"],
+           answer:3,
+           
+       },
+       {
+           q:"What is the part marked as 'X' in the bearing?<br /><img src='https://1.bp.blogspot.com/-Pzvc3pk0hWs/X4B39C5ZmYI/AAAAAAAAGkw/li61kZUA7T4wyIOpHNlB_PBAwTHJnupEACLcBGAsYHQ/s0/Shot%2B0051.png'>",
+           options:["A) Outer race | ब&#2366;हर&#2368; द&#2380;ड&#2364; ","B) Ball cage | ब&#2377;ल क&#2375;ज ","C) Inner race | भ&#2368;तर क&#2368; द&#2380;ड&#2364; ","D) Rolling elements | र&#2379;ल&#2367;&#2306;ग तत&#2381;व"],
+           answer:3,
+           
+       },
+      {
+           q:"Which type of bearing metal is self lubricated? | क&#2367;स प&#2381;रक&#2366;र क&#2375; ब&#2367;यर&#2367;&#2306;ग ध&#2366;त&#2369; म&#2375;&#2306; स&#2381;वय&#2306; स&#2375; स&#2381;न&#2375;हक ह&#2379;त&#2366; ह&#2376;?",
+           options:["A) White metal | व&#2366;इट म&#2375;टल ","B) Sintered alloy | स&#2367;न&#2381;टर&#2381;ड अल&#2366;ई ","C) Aluminum alloy | एल&#2381;य&#2370;म&#2367;न&#2367;यम म&#2367;श&#2381;र ध&#2366;त&#2369; ","D) Cadmium based alloy | क&#2376;डम&#2367;यम ब&#2375;स&#2381;ड म&#2367;श&#2381;र ध&#2366;त&#2369;"],
+           answer:1,
+           
+       },
+       {
+           q:"Which bearing is used in the limited space? | स&#2368;म&#2367;त जगह&#2379;&#2306; म&#2375;&#2306; क&#2367;स ब&#2367;यर&#2367;&#2306;ग क&#2366; उपय&#2379;ग क&#2367;य&#2366; ज&#2366;त&#2366; ह&#2376; ?",
+           options:["A) Needle bearing | न&#2368;डल ब&#2367;यर&#2367;&#2306;ग ","B) Thrust ball bearing | थ&#2381;रस&#2381;ट ब&#2377;ल ब&#2367;यर&#2367;&#2306;ग ","C) Taper roller bearing | ट&#2375;पर र&#2379;लर ब&#2367;यर&#2367;&#2306;ग ","D) Angular contact ball bearing | ए&#2306;ग&#2369;लर क&#2366;न&#2381;ट&#2376;क&#2381;ट ब&#2366;ल ब&#2367;यर&#2367;&#2306;ग "],
+           answer:0,
+           
+       },
+          
+       {
+           q:"What is the name of the pipe fitting? | इस प&#2366;इप फ&#2367;ट&#2367;&#2306;ग क&#2366; न&#2366;म क&#2381;य&#2366; ह&#2376;?<br /><img src='https://1.bp.blogspot.com/-vmy_a_ElBOo/X4B39x1cWvI/AAAAAAAAGk8/GX2RJz8C2w8kDFFuymaKi6-ZRmi9U4MCgCLcBGAsYHQ/s0/Shot%2B0054.png'>",
+           options:["A) 45&#176; elbow | 45 &#176; एल&#2381;ब&#2379; ","B) Long radius elbow | ल&#2377;न&#2381;ग र&#2375;ड&#2367;यस एल&#2381;ब&#2379; ","C) Tee joint pipe | ट&#2368; ज&#2377;इ&#2306;ट प&#2366;इप ","D) Short radius elbow | श&#2379;र&#2381;ट र&#2375;ड&#2367;यस एल&#2381;ब&#2379;"],
+           answer:0,
+       },
+       {
+           q:"What is the angle of deviations provided on elbows and bends in pipe works? | प&#2366;इप क&#2375; क&#2366;र&#2381;य&#2379; म&#2375; एल&#2381;ब&#2379; और ब&#2375;&#2306;ड पर व&#2367;चलन क&#2366; क&#2379;ण क&#2367;तन&#2366; ह&#2379;त&#2366; ह&#2376; ?",
+           options:["A) 90&#176; and 45&#176;","B) 30&#176; and 60&#176;","C) 20&#176; and 40&#176;","D) 60&#176; and 45&#176;"],
+           answer:0,
+           
+       },
+       {
+           q:" How the water flow is stopped from the valve around the stuffing box? | स&#2381;टफ&#2367;&#2306;ग ब&#2377;क&#2381;स क&#2375; प&#2366;स लग&#2375; व&#2366;ल&#2381;व स&#2375; प&#2366;न&#2368; क&#2366; प&#2381;रव&#2366;ह क&#2379; क&#2376;स&#2375; र&#2379;क&#2366; ज&#2366;त&#2366; ह&#2376;? ",
+           options:["A) Replace the spindle | स&#2381;प&#2367;&#2306;डल क&#2379; बदलकर ","B) Tightening the bonnet | ब&#2379;नट क&#2379; कसन&#2366; ","C) Tightening the hand wheel | ह&#2376;ण&#2381;ड व&#2381;ह&#2368;ल क&#2379; कसन&#2366; ","D) Packing with asbestos hemp | अस&#2381;ब&#2375;स&#2381;टर ह&#2375;म&#2381;प क&#2375; स&#2366;थ प&#2376;क&#2367;&#2306;ग"],
+           answer:3,
+           
+       },
+       {
+           q:"What is the name of the pipe fitting? | इस प&#2366;इप फ&#2367;ट&#2367;&#2306;ग क&#2366; न&#2366;म क&#2381;य&#2366; ह&#2376;?<br /><img src='https://1.bp.blogspot.com/-R5cvmoUYbCI/X4B3-XPnN9I/AAAAAAAAGlA/AlkTdFPZbpQ2HZXrvW1gKyjq6td8WF12ACLcBGAsYHQ/s0/Shot%2B0055.png'>",
+           options:["A) Tee joint | ट&#2368; ज&#2377;इ&#2306;ट ","B) Eccentric reducer | एस&#2381;ट&#2381;र&#2367;क र&#2367;ड&#2381;य&#2370;सर ","C)  Reducer tee joint | र&#2367;ड&#2381;य&#2370;सर ट&#2368; ज&#2377;इ&#2306;ट ","D)  Concentric reducer | कन&#2381;स&#2375;न&#2381;ट&#2381;र&#2367;क र&#2367;ड&#2381;य&#2370;सर"],
+           answer:2,
+           
+       },
+       {
+           q:"What is the position of eccentric reducer are used in pipe lines? | प&#2366;इप ल&#2366;इन&#2379;&#2306; म&#2375;&#2306; एक&#2381;स&#2375;न&#2381;ट&#2381;र&#2367;क र&#2375;ड&#2381;सर क&#2368; प&#2379;ज&#2368;शन क&#2381;य&#2366; ह&#2379;त&#2368; ह&#2376;? ",
+           options:["A) Vertical position | वर&#2381;ट&#2367;कल प&#2379;ज&#2368;शन ","B) Angular position | ए&#2306;ग&#2369;लर प&#2379;ज&#2368;शन ","C) Radius position | र&#2375;ड&#2367;यस प&#2379;ज&#2368;शन ","D) Horizontal position | ह&#2377;र&#2367;ज&#2377;न&#2381;टल प&#2379;ज&#2368;शन"],
+           answer:2,
+           
+       },
+       {
+           q:"What is the name of the pipe fitting? | इस प&#2366;इप फ&#2367;ट&#2367;&#2306;ग क&#2366; न&#2366;म क&#2381;य&#2366; ह&#2376;?<br /><img src='https://1.bp.blogspot.com/-jqkxEMXdUNQ/X4B3-aLksZI/AAAAAAAAGlE/aMVstzhH1SE2mGEopa-BV3QH5n4jQf3ggCLcBGAsYHQ/s0/Shot%2B0056.png'>",
+           options:["A) Coupling | कपल&#2367;&#2306;ग ","B) Long nipple | ल&#2377;न&#2381;ग न&#2367;प&#2381;पल ","C) Eccentric reducer | एस&#2381;ट&#2381;र&#2367;क र&#2367;ड&#2381;य&#2370;सर ","D) Concentric reducer | कन&#2381;स&#2375;न&#2381;ट&#2381;र&#2367;क र&#2367;ड&#2381;य&#2370;सर"],
+           answer:2,
+           
+       },
+       {
+           q:"What is the remedial measure to stop the dripping of water from house hold tap even after firmly closed? | मजब&#2370;त&#2368; स&#2375; ब&#2306;द ह&#2379;न&#2375; क&#2375; ब&#2366;द भ&#2368; घर क&#2375; नल स&#2375; प&#2366;न&#2368; क&#2375; टपकन&#2375; क&#2379; र&#2379;कन&#2375; क&#2375; ल&#2367;ए उप&#2366;य क&#2381;य&#2366; ह&#2376;?",
+           options:["A) Replace the tap | नल क&#2379; बदल द&#2375;&#2306; ","B) Replace washer | व&#2377;शर बदल&#2375;&#2306; ","C) Renew tap spindle | ट&#2375;प स&#2381;प&#2367;&#2306;डल क&#2379; ठ&#2368;क कर&#2375; ","D) Tighten stuffing box | स&#2381;टफ&#2367;&#2306;ग ब&#2377;क&#2381;स क&#2379; कस ल&#2375;&#2306;"],
+           answer:1,
+           
+       },
+       {
+           q:"How pipes are classified? | प&#2366;इप&#2379;&#2306; क&#2379; क&#2376;स&#2375; वर&#2381;ग&#2368;क&#2371;त क&#2367;य&#2366; ज&#2366;त&#2366; ह&#2376;? ",
+           options:["A) Uses | उपय&#2379;ग क&#2375; अन&#2369;स&#2366;र ","B) Color | र&#2306;ग क&#2375; अन&#2369;स&#2366;र ","C) Shapes | आक&#2371;त&#2367;य&#2366;&#2305; क&#2375; अन&#2369;स&#2366;र ","D) Material | मट&#2375;र&#2367;यल क&#2375; अन&#2369;स&#2366;र"],
+           answer:0,
+           
+       },
+       {
+           q:"Which standard pipe fitting is used to close a pipe line having internal thread? | आत&#2306;र&#2367;क च&#2370;ड&#2364;&#2367;य&#2366; व&#2366;ल&#2375; प&#2366;इप ल&#2366;इन क&#2379; ब&#2306;द करन&#2375; क&#2375; ल&#2367;ए क&#2367;स म&#2366;नक प&#2366;इप फ&#2367;ट&#2367;&#2306;ग क&#2366; उपय&#2379;ग क&#2367;य&#2366; ज&#2366;त&#2366; ह&#2376;?",
+           options:["A)  Plug | प&#2381;ल ग ","B) Cap | क&#2376;प ","C) Reducer | र&#2375;ड&#2369;सर ","D) Coupling | कपल&#2367;&#2306;ग"],
+           answer:3,
+           
+       },
+       {
+           q:" Which type of wrench is used for more than 50 mm diameter pipe to tight with heavy gripping? | क&#2367;स प&#2381;रक&#2366;र क&#2375; र&#2367;&#2306;च क&#2366; उपय&#2379;ग 50 म&#2367;म&#2368; स&#2375; अध&#2367;क व&#2381;य&#2366;स क&#2375; म&#2368;टर प&#2366;इप क&#2375; ल&#2367;ए मजब&#2370;त पकड&#2364; क&#2375; स&#2366;थ कसन&#2375; क&#2375; ल&#2367;ए क&#2367;य&#2366; ज&#2366;त&#2366; ह&#2376;?",
+           options:["A) Strap wrench | स&#2381;ट&#2381;र&#2376;प र&#2367;&#2306;च ","B) Foot print wrench | फ&#2369;ट प&#2381;र&#2367;&#2306;ट र&#2367;&#2306;च ","C) Chain pipe wrench | च&#2375;न प&#2366;इप र&#2367;&#2306;च ","D) Stillson pipe wrench | स&#2381;ट&#2367;लसन प&#2366;इप र&#2367;&#2306;च"],
+           answer:2,
+           
+       },
+       {
+           q:" What is the name of part marked as 'X'? |  'एक&#2381;स' क&#2375; र&#2370;प म&#2375;&#2306; च&#2367;ह&#2381;न&#2367;त भ&#2366;ग क&#2366; न&#2366;म क&#2381;य&#2366; ह&#2376;?<br /><img src='https://1.bp.blogspot.com/-GuWBJMlK_X4/X4B3_VDziqI/AAAAAAAAGlM/_Gt2LreUR7428yKrJGlcOy-QG7HgxmHLQCLcBGAsYHQ/s0/Shot%2B0058.png'>",
+           options:["A) Bonnet | ब&#2379;नट ","B) Packing | प&#2376;क&#2367;&#2306;ग ","C) Gland nut | ग&#2381;ल&#2376;&#2306;ड नट ","D) Shaft or spindle | श&#2366;फ&#2381;ट य&#2366; स&#2381;प&#2367;&#2306;डल"],
+           answer:2,
+           
+       },
+       {
+           q:"What is the name of part marked as 'x' in the pipe joint? | प&#2366;इप क&#2375; ज&#2379;ड&#2364; म&#2375;&#2306; भ&#2366;ग'x' क&#2366; क&#2381;य&#2366; न&#2366;म ह&#2376;?<br /><img src='https://1.bp.blogspot.com/-5W0LorlAcXY/X4B3-nqlakI/AAAAAAAAGlI/RTxvizGJ75YcDmeKYJ89rIGdafBrPUCeACLcBGAsYHQ/s0/Shot%2B0057.png'>",
+           options:["A) outer pipe | ब&#2366;हर&#2368; प&#2366;इप ","B) Hemp packing | ह&#2375;म&#2381;प प&#2376;क&#2367;&#2306;ग ","C) Tapered male thread | ट&#2375;परड म&#2375;ल थ&#2381;र&#2375;ड ","D) Parallel female thread | प&#2376;र&#2375;लल फ&#2368;म&#2375;ल थ&#2381;र&#2375;ड"],
+           answer:1,
+           
+       },
+       {
+           q:"What is the remedy if the spindle rotates continuously so that the gate valve is not closed? यद&#2367; स&#2381;प&#2367;&#2306;डल लग&#2366;त&#2366;र घ&#2370;म रह&#2366; ह&#2367;य&#2366; ज&#2367;सक&#2375; ग&#2375;ट व&#2366;ल&#2381;व ब&#2306;द नह&#2368;&#2306; ह&#2379; रह&#2366; ह&#2376; , इसक&#2379; ठ&#2368;क करन&#2375; क&#2366; उप&#2366;य ह&#2376; ?",
+           options:["A) Replace the valve | व&#2366;ल&#2381;व बदल&#2375;&#2306; ","B) Tighten the gland nut | ग&#2381;ल&#2376;&#2306;ड नट क&#2379; कस ल&#2375;&#2306; ","C) Replace the worn out part | घ&#2367;स च&#2369;क&#2375; प&#2366;र&#2381;ट क&#2379; बदल&#2375; ","D) Renew the gland packing | ग&#2381;ल&#2376;&#2306;ड प&#2376;क&#2367;&#2306;ग क&#2379; नव&#2368;न&#2368;क&#2371;त कर&#2375;&#2306;"],
+           answer:2,
+           
+       },
+       {
+           q:" Which type of pipe joint take branch at 90&#176;? | क&#2367;स प&#2381;रक&#2366;र क&#2366; प&#2366;इप ज&#2377;इ&#2306;ट 90&#176; पर ब&#2381;र&#2366;&#2306;च बन&#2366;त&#2366; ह&#2376;",
+           options:["A)Coupling | कपल&#2367;&#2306;ग ","B)Tee branch | ट&#2368; ब&#2381;र&#2366;&#2306;च ","C) Eccentric reducer | एस&#2381;ट&#2381;र&#2367;क र&#2367;ड&#2381;य&#2370;सर ","D) Concentric reducer | कन&#2381;स&#2375;न&#2381;ट&#2381;र&#2367;क र&#2367;ड&#2381;य&#2370;सर"],
+           answer:1,
+           
+       },
+       {
+           q:"What is the name of part marked as x? | X क&#2375; र&#2370;प म&#2375; च&#2367;ह&#2381;न&#2367;त भ&#2366;ग क&#2366; न&#2366;म बत&#2366;ए?<br /><img src='https://1.bp.blogspot.com/-RncVNLeE-Zg/X4B4ANTqNTI/AAAAAAAAGlY/J_lKFel87yAeXdxg0LrHXkmcjl2b5CYIQCLcBGAsYHQ/s0/Shot%2B0061.png'>",
+           options:["A) Cutter wheel | कटर व&#2381;ह&#2368;ल ","B) Adjusting screw | अजस&#2381;ट&#2367;&#2306;ग स&#2381;क&#2381;र&#2370; ","C) Guide rollers | ग&#2366;इड र&#2379;लर&#2381;स ","D) Hand lever | ह&#2376;ण&#2381;ड ल&#2368;वर"],
+           answer:2,
+           
+       },
+       {
+           q:" What is the part marked as 'x'? | 'X' क&#2375; र&#2370;प म&#2375;&#2306; च&#2367;ह&#2381;न&#2367;त भ&#2366;ग क&#2381;य&#2366; ह&#2376;?<br /><img src='https://1.bp.blogspot.com/-7LEm4lQqxXo/X4B4A0kEUnI/AAAAAAAAGlg/LSpJCFIIqg0hBKQqtKHs1yW7IgDNc6NDACLcBGAsYHQ/s0/Shot%2B0063.png'>",
+           options:["A) Pivot | प&#2367;व&#2379;ट ","B) Spring | स&#2381;प&#2381;र&#2367;&#2306;ग ","C) Movable jaw | म&#2370;व&#2375;बल ज&#2377; ","D) Adjusting nut | एडजस&#2381;ट&#2367;&#2306;ग नट"],
+           answer:3,
+           
+       },
+       {
+           q:"What is the capacity of the pipe vice to hold pipes diameter in mm? | प&#2366;इप व&#2366;ईस क&#2367;तन&#2375; म&#2367;ल&#2368;म&#2368;टर व&#2381;य&#2366;स क&#2375; प&#2366;इप&#2379; क&#2379; पकड&#2364;न&#2375; क&#2368; क&#2381;षमत&#2366; रखत&#2366; ह&#2376;?",
+           options:["A) 68 mm","B) 65mm","C) 63mm","D) 72 mm"],
+          answer:2,
+           
+       },
+       {
+           q:"Which pipe fitting is used to divert the flow direction of pipe? | प&#2366;इप क&#2375; प&#2381;रव&#2366;ह क&#2368; द&#2367;श&#2366; क&#2379; म&#2379;ड&#2364;न&#2375; क&#2375; ल&#2367;ए क&#2367;स प&#2366;इप फ&#2367;ट&#2367;&#2306;ग क&#2366; उपय&#2379;ग क&#2367;य&#2366; ज&#2366;त&#2366; ह&#2376;?",
+           options:["A) Union | य&#2370;न&#2367;यन ","B) Plug | प&#2381;लग ","C) Elbow | एल&#2381;ब&#2379; ","D) Coupling | कपल&#2367;&#2306;ग"],
+           answer:2,
+           
+       },
+       {
+           q:"Which type of coupling is used on vehicle propeller shaft? | व&#2366;हन प&#2381;र&#2379;प&#2375;लर श&#2366;फ&#2381;ट पर क&#2367;स प&#2381;रक&#2366;र क&#2375; कपल&#2367;&#2306;ग क&#2366; उपय&#2379;ग क&#2367;य&#2366; ज&#2366;त&#2366; ह&#2376;?",
+           options:["A) Plate coupling | प&#2381;ल&#2375;ट कपल&#2367;&#2306;ग ","B) Clamp coupling | क&#2381;ल&#2376;&#2306;प कपल&#2367;&#2306;ग ","C) Slip type coupling | स&#2381;ल&#2367;प ट&#2366;इप कपल&#2367;&#2306;ग ","D) Universal coupling | य&#2370;न&#2367;वर&#2381;सल कपल&#2367;&#2306;ग"],
+           answer:3,
+           
+       },
+       {
+           q:" What is the pipe fitting of 90&#176; and its branches may be equal in diameter? | क&#2367;स प&#2366;इप फ&#2367;ट&#2367;&#2306;ग म&#2375; 90 &#176; और श&#2366;ख&#2366;ए&#2306; व&#2381;य&#2366;स म&#2375;&#2306; सम&#2366;न ह&#2379; सकत&#2368; ह&#2376;&#2306;?",
+           options:["A) Tee joint | ट&#2368; ज&#2377;इ&#2306;ट ","B)  Elbow joint | एल&#2381;ब&#2379; ज&#2377;इ&#2306;ट ","C) Coupling joint | कपल&#2367;&#2306;ग ज&#2377;इ&#2306;ट ","D) Union joint | य&#2370;न&#2367;यन ज&#2377;इ&#2306;ट"],
+           answer:0,
+           
+       },
+      {
+           q:"What is the pipe fitting? | यह प&#2366;इप फ&#2367;ट&#2367;&#2306;ग क&#2381;य&#2366; ह&#2376;?<br /><img src='https://1.bp.blogspot.com/-Ch_pY0zfB3w/X4B4BNmUXFI/AAAAAAAAGlk/aea7QZK4JugefiZR1z_YrHssanznNznkQCLcBGAsYHQ/s0/Shot%2B0064.png'>",
+           options:["A) Reducer | र&#2367;सर ","B) Nipple | न&#2367;प&#2381;पल ","C) Cap | क&#2376;प ","D) Plug | प&#2381;लग"],
+           answer:3,
+           
+       },
+       {
+           q:" Which valve is used to control flow and is only kept in either open or closed position? | प&#2381;रव&#2366;ह क&#2379; न&#2367;य&#2306;त&#2381;र&#2367;त करन&#2375; क&#2375; ल&#2367;ए क&#2367;स व&#2366;ल&#2381;व क&#2366; उपय&#2379;ग क&#2367;य&#2366; ज&#2366;त&#2366; ह&#2376; और इस&#2375; क&#2375;वल ख&#2369;ल&#2366; य&#2366; ब&#2306;द स&#2381;थ&#2367;त&#2367; म&#2375;&#2306; रख&#2366; ज&#2366;त&#2366;",
+           options:["A) Gate valve | ग&#2375;ट व&#2366;ल&#2381;व ","B) Globe valve | ग&#2381;ल&#2379;ब व&#2366;ल&#2381;व ","C) Needle valve | न&#2368;डल व&#2366;ल&#2381;व ","D) Non-return valve | न&#2377;न र&#2367;टर&#2381;न व&#2366;ल&#2381;व"],
+           answer:3,
+           
+       },
+       {
+           q:" Which is used to divert at 45&#176;in pipeline? | क&#2367;सक&#2366; उपय&#2379;ग प&#2366;इपल&#2366;इन क&#2379; 45 &#176; पर म&#2379;ड&#2364;न&#2375; क&#2375; ल&#2367;ए क&#2367;य&#2366; ज&#2366;त&#2366; ह&#2376;?",
+           options:["A) Elbow | एल&#2381;ब&#2379; ","B) Coupling | कपल&#2367;&#2306;ग ","C) Reducer | र&#2367;ड&#2370;सर ","D) Branch | ब&#2381;र&#2366;&#2306;च"],
+           answer:0,
+           
+       },
+         
+        
+       {
+           q:"Which type of jig do not have base plate? | क&#2367;स प&#2381;रक&#2366;र क&#2375; ज&#2367;ग म&#2375;&#2306; ब&#2375;स प&#2381;ल&#2375;ट नह&#2368;&#2306; ह&#2379;ग&#2368;?",
+           options:["A) Table jig | ट&#2375;बल ज&#2367;ग ","B) Plate jig | प&#2381;ल&#2375;ट ज&#2367;ग ","C) Template jig | ट&#2375;म&#2381;पल&#2375;ट ज&#2367;ग ","D) Template jig | ट&#2375;म&#2381;पल&#2375;ट ज&#2367;ग"],
+           answer:2,
+       },
+       {
+           q:"What is the name of jig? | इस ज&#2367;ग क&#2366; न&#2366;म क&#2381;य&#2366; ह&#2376; ?<br /><img src='https://1.bp.blogspot.com/-QPnANsP0lgA/X4P90BD6ybI/AAAAAAAAGsc/8Mw6EvEu6zACPs3XMNyUIvvt_jtnJE9AACLcBGAsYHQ/s0/Shot%2B0001.png'>",
+           options:["A) Leaf jig | ल&#2368;फ ज&#2367;ग ","B) Solid jig | स&#2377;ल&#2367;ड ज&#2367;ग ","C) Solid jig | स&#2377;ल&#2367;ड ज&#2367;ग ","D) Angle plate jig | ए&#2306;गल प&#2381;ल&#2375;ट ज&#2367;ग"],
+           answer:3,
+           
+       },
+       {
+           q:"What is the name of clamp? | इस क&#2381;ल&#2376;&#2306;प क&#2366; न&#2366;म क&#2381;य&#2366; ह&#2376;?<br /><img src='https://1.bp.blogspot.com/-Lxb7G3s_ZFQ/X4P90CqhnxI/AAAAAAAAGsg/zQLvyNgt0aQcGcQ-7FHrEtOjDhHxwXIQQCLcBGAsYHQ/s0/Shot%2B0003.png'>",
+           options:["A) Strap clamp | स&#2381;ट&#2381;र&#2375;प क&#2381;ल&#2376;&#2306;प ","B) Cam clamp | क&#2376;म क&#2381;ल&#2376;&#2306;प ","C) Latch clamp | ल&#2376;च क&#2381;ल&#2376;&#2306;प ","D) Latch clamp | ल&#2376;च क&#2381;ल&#2376;&#2306;प "],
+           answer:1,
+           
+       },
+       {
+           q:"What is the name of jig? | इस ज&#2367;ग क&#2366; न&#2366;म क&#2381;य&#2366; ह&#2376; ?<br /><img src='https://1.bp.blogspot.com/-VSkBmkk13Dc/X4P90ESWj_I/AAAAAAAAGsk/z74mgN00ttcmcDbw5ahC53-ifoMM7rz6wCLcBGAsYHQ/s0/Shot%2B0002.png'>",
+           options:["A) Box jig | ब&#2377;क&#2381;स ज&#2367;ग ","B) Post jig | प&#2379;स&#2381;ट ज&#2367;ग ","C) Turn over jig | टर&#2381;न ओवर ज&#2367;ग ","D) Sandwich jig | स&#2376;&#2306;डव&#2367;च ज&#2367;ग"],
+           answer:2,
+           
+       },
+       {
+           q:" Which type of bush is used in jig to perform more than one operation in same location? | एक ह&#2368; स&#2381;थ&#2366;न पर एक स&#2375; अध&#2367;क ऑपर&#2375;शन करन&#2375; क&#2375; ल&#2367;ए ज&#2367;ग म&#2375;&#2306; क&#2367;स प&#2381;रक&#2366;र क&#2368; ब&#2369;श क&#2366; उपय&#2379;ग क&#2367;य&#2366; ज&#2366;त&#2366; ह&#2376;?",
+           options:["A) Slip bush | स&#2381;ल&#2367;प ब&#2369;श ","B) Plain bush | प&#2381;ल&#2375;न ब&#2369;श ","C) Fixed bush | फ&#2367;क&#2381;स&#2381;ड ब&#2369;श ","D) Liner bush | ल&#2368;न&#2367;यर ब&#2369;श"],
+           answer:0,
+           
+       },
+       {
+           q:"What is the purpose of grooves provided in the c Channel jig 'V' blocks?| च&#2376;नल ज&#2367;ग 'V' ब&#2381;ल&#2377;क म&#2375;&#2306; द&#2367;ए गए ग&#2381;र&#2369;व&#2375;स क&#2366; उद&#2381;द&#2375;श&#2381;य क&#2381;य&#2366; ह&#2376;?",
+           options:["A) Reduce the weight | वजन कम करन&#2366; ","B) Support the work piece | वर&#2381;क प&#2368;स क&#2379; सह&#2366;र&#2366;  करन&#2366; ","C) Accommodate the clamp | क&#2381;ल&#2376;&#2306;प क&#2379; म&#2366;य&#2379;ज&#2367;त करन&#2366; ","D) allow tharmal expantion  &#2404;  थर&#2381;मल ब&#2367;स&#2381;त&#2366;र क&#2368; अन&#2369;मत&#2367; द&#2375;न&#2366;"],
+           answer:2,
+           
+       },
+       {
+           q:"Which is the important factor to determine the construction of fixture? | फ&#2367;क&#2381;स&#2381;च र क&#2375; न&#2367;र&#2381;म&#2366;ण क&#2366; न&#2367;र&#2381;ध&#2366;रण करन&#2375; क&#2375; ल&#2367;ए क&#2380;न स&#2366; महत&#2381;वप&#2370;र&#2381;ण क&#2366;रक ह&#2376;?",
+           options:["A) Machining method | मश&#2368;न&#2367;&#2306;ग क&#2368; व&#2367;ध&#2367; ","B) Location and clamping | ल&#2379;क&#2375;ट&#2367;&#2306;ग और क&#2381;ल&#2376;&#2306;पइ&#2306;ग ","C) Tool guiding and frame | ट&#2370;ल ग&#2366;इड&#2367;&#2306;ग और फ&#2381;र&#2375;म ","D) Size of work piece and tool | क&#2366;र&#2381;य खण&#2381;ड और ट&#2370;ल क&#2366; स&#2366;इज&#2364;"],
+           answer:0,
+           
+       },
+       {
+           q:"Why the balancing weight is provided in the turning fixture? | टर&#2381;न&#2367;&#2306;ग फ&#2367;क&#2381;स&#2381;च र म&#2375;&#2306; ब&#2376;ल&#2375;&#2306;स&#2367;&#2306;ग व&#2375;ट क&#2381;य&#2379;&#2306; प&#2381;रद&#2366;न क&#2367;य&#2366; ज&#2366;त&#2366; ह&#2376;?",
+           options:["A) To guide tool | ट&#2370;ल क&#2379; ग&#2366;इड करन&#2375; क&#2375; ल&#2367;ए ","B) To balance the tool | ट&#2370;ल क&#2379; ब&#2376;ल&#2375;&#2306;स करन&#2375; क&#2375; ल&#2367;ए ","C) To balance worktable | वर&#2381;क ट&#2375;बल क&#2379; ब&#2376;ल&#2375;&#2306;स करन&#2375; क&#2375; ल&#2367;ए ","D) To balance irregular workpiece | अन&#2367;यम&#2367;त वर&#2381;कप&#2368;स क&#2379; स&#2306;त&#2369;ल&#2367;त करन&#2375; क&#2375; ल&#2367;ए"],
+           answer:3,
+           
+       },
+       {
+           q:"What is the purpose of setting blocks used in the fixture? | फ&#2367;क&#2381;स&#2381;च र म&#2375;&#2306; उपय&#2379;ग क&#2367;ए ज&#2366;न&#2375; व&#2366;ल&#2375; स&#2375;ट&#2367;&#2306;ग ब&#2381;ल&#2366;क क&#2366; उद&#2381;द&#2375;श&#2381;य क&#2381;य&#2366; ह&#2376;?",
+           options:["A) Position the balancing weight | बर&#2366;बर भ&#2366;र क&#2368; स&#2381;थ&#2367;त&#2367; ","B) Position the clamp and locators | क&#2381;ल&#2376;&#2306;प और ल&#2379;क&#2375;टर क&#2368; स&#2381;थ&#2367;त&#2367; ","C) Position the fixture on machine table | मश&#2368;न क&#2368; म&#2375;ज पर स&#2381;थ&#2367;रत&#2366; क&#2368; स&#2381;थ&#2367;त&#2367; ","D) Position the fixture and work related to cutter | कटर स&#2375; स&#2306;ब&#2306;ध&#2367;त स&#2381;थ&#2367;रत&#2366; और क&#2366;म क&#2368; स&#2381;थ&#2367;त&#2367;"],
+           answer:3,
+           
+       },
+       {
+           q:"Which type of fixture is used for machining on evenly spaced surfaces? | सम&#2366;न र&#2370;प स&#2375; स&#2381;थ&#2366;न&#2367;क सतह&#2379;&#2306; पर मश&#2368;न&#2367;&#2306;ग क&#2375; ल&#2367;ए क&#2367;स प&#2381;रक&#2366;र क&#2368; फ&#2367;क&#2381;स&#2381;चर क&#2366; उपय&#2379;ग क&#2367;य&#2366; ज&#2366;त&#2366; ह&#2376;?",
+           options:["A) Plate fixture | प&#2381;ल&#2375;ट फ&#2367;क&#2381;स&#2381;चर ","B) Vice jaw fixture | व&#2366;ईस ज&#2377; फ&#2367;क&#2381;स&#2381;चर ","C) Indexing fixture | इ&#2306;ड&#2375;क&#2381;स&#2367;&#2306;ग फ&#2367;क&#2381;स&#2381;चर ","D) Angle plate fixture | ए&#2306;गल प&#2381;ल&#2375;ट फ&#2367;क&#2381;स&#2381;चर"],
+           answer:2,
+           
+       },
+       {
+           q:"Which type of jig is used for awkwardly shaped work piece to drill at different angles? | व&#2367;भ&#2367;न&#2381;न क&#2379;ण&#2379;&#2306; म&#2375;&#2306; अज&#2368;ब आक&#2366;र क&#2375; क&#2366;म क&#2379; ड&#2381;र&#2367;ल करन&#2375; क&#2375; ल&#2367;ए क&#2367;स प&#2381;रक&#2366;र क&#2366; ज&#2367;ग उपय&#2379;ग क&#2367;य&#2366; ज&#2366;त&#2366; ह&#2376;&#2404;",
+           options:["A) Post jig | प&#2379;स&#2381;ट ज&#2367;ग ","B) Solid jig | स&#2377;ल&#2367;ड ज&#2367;ग ","C) Indexing jig | इ&#2306;ड&#2375;क&#2381;स&#2367;&#2306;ग ज&#2367;ग ","D) Trunnion jig | द&#2370;न&#2367;यन ज&#2367;ग"],
+           answer:3,
+           
+       },
+       {
+           q:"AWhich device holds, supports, locates and also guide the cutting tool for operation? | क&#2380;न स&#2366; उपकरण ऑपर&#2375;शन क&#2375; ल&#2367;ए कट&#2367;&#2306;ग ट&#2370;ल क&#2379; पकड&#2364;त&#2366;, सप&#2379;र&#2381;ट करत&#2366;, ल&#2379;क&#2375;ट और स&#2366;थ स&#2366;थ ग&#2366;इड भ&#2368; करत&#2366; ह&#2376;",
+           options:["A) Jig | ज&#2367;ग ","B) Fixture | फ&#2367;क&#2381;चर ","C) Chuck | चक ","D) Machine vice | मश&#2368;न व&#2366;इस"],
+           answer:0,
+           
+       },
+       {
+           q:" What is the name of clamp used in jig? | ज&#2367;ग म&#2375;&#2306; प&#2381;रय&#2369;क&#2381;त क&#2381;ल&#2376;&#2306;प क&#2366; न&#2366;म क&#2381;य&#2366; ह&#2376;?<br /><img src='https://1.bp.blogspot.com/-VdD9qpf_qDc/X4P91XaNf3I/AAAAAAAAGs0/z6xwfcDBOrALhIU8SVPwSRnjtJA3PgHCACLcBGAsYHQ/s0/Shot%2B0007.png'>",
+           options:["A) Tooth clamp | ट&#2370;थ क&#2381;ल&#2376;&#2306;प ","B) Latch clamp | ल&#2376;च क&#2381;ल&#2376;&#2306;प ","C) Toggle clamp | ट&#2377;गल क&#2381;ल&#2376;&#2306;प ","D) Wedge clamp | व&#2376;ज क&#2381;ल&#2376;&#2306;प"],
+           answer:3,
+           
+       },
+       {
+           q:"What is the name of jig? | इस ज&#2367;ग क&#2366; न&#2366;म  क&#2381;य&#2366; ह&#2376;? <br /><img src='https://1.bp.blogspot.com/-cP7vhw7PzjQ/X4P91pNGsnI/AAAAAAAAGs4/tNtSxvnx8Q8Ihcysr_HlhSXRbyXh-uLNgCLcBGAsYHQ/s0/Shot%2B0008.png'>",
+           options:["A) Box jig | ब&#2377;क&#2381;स ज&#2367;ग ","B) Drill jig | ड&#2381;र&#2367;ल ज&#2367;ग ","C) Post jig | प&#2379;स&#2381;ट ज&#2367;ग ","D) Leaf jig | ल&#2368;फ ज&#2367;ग"],
+           answer:0,
+           
+       },
+       {
+           q:"What is the method of lubrication? | यह स&#2381;न&#2375;हन क&#2368; व&#2367;ध&#2367; क&#2379;नस&#2368; ह&#2376;?<br /><img src='https://1.bp.blogspot.com/-Qjj5eWkmpdg/X4P91tM5a9I/AAAAAAAAGs8/ukvcAIs-j1cCymJ-rE1CcVADCZRniWDrgCLcBGAsYHQ/s0/Shot%2B0009.png'>",
+           options:["A) Force feed | फ&#2364;&#2379;र&#2381;स फ&#2368;ड ","B) Gravity feed | ग&#2381;र&#2375;व&#2367;ट&#2368; फ&#2368;ड ","C) Splash feed | स&#2381;पल&#2376;श फ&#2364;&#2368;ड ","D) Line feed | प&#2381;र&#2375;शर फ&#2368;ड"],
+           answer:0,
+           
+       },
+       {
+           q:"Why two or four hold down slots are provided in the base plate of milling fixture? | म&#2367;ल&#2367;&#2306;ग फ&#2367;क&#2381;स&#2381;चर क&#2375; ब&#2375;स प&#2381;ल&#2375;ट म&#2375;&#2306; द&#2379; य&#2366; च&#2366;र ह&#2379;ल&#2381;ड ड&#2366;उन स&#2381;ल&#2377;ट क&#2381;य&#2379;&#2306; प&#2381;रद&#2366;न क&#2367;ए ज&#2366;त&#2375; ह&#2376;&#2306;?",
+           options:["A) For rigid clamping | कठ&#2379;र क&#2381;ल&#2376;&#2306;प&#2367;&#2306;ग क&#2375; ल&#2367;ए ","B) For guiding the tool | ट&#2370;ल क&#2379; ग&#2366;इड करन&#2375; क&#2375; ल&#2367;ए ","C) For locating workpiece | वर&#2381;कप&#2368;स क&#2379; ल&#2379;क&#2375;ट करन&#2375; क&#2375; ल&#2367;ए ","D) For adjusting the job setting | ज&#2377;ब स&#2375;ट&#2367;&#2306;ग क&#2379; सम&#2366;य&#2379;ज&#2367;त करन&#2375; क&#2375; ल&#2367;ए"],
+           answer:0,
+           
+       },
+       {
+           q:"Which bush is used to provide a hardened hole for renewable bushes? | र&#2368;न&#2370;अबल ब&#2369;श&#2375;स क&#2375; ल&#2367;ए कठ&#2379;र छ&#2375;द प&#2381;रद&#2366;न करन&#2375; क&#2375; ल&#2367;ए क&#2367;स ब&#2369;श क&#2366; उपय&#2379;ग क&#2367;य&#2366; ज&#2366;त&#2366; ह&#2376;?",
+           options:["A) Slip bush | स&#2381;ल&#2367;प ब&#2369;श ","B) Plain bush | प&#2381;ल&#2375;न ब&#2369;श ","C) Fixed bush | फ&#2367;क&#2381;स&#2381;ड ब&#2369;श ","D) Liner bush | ल&#2368;न&#2367;यर ब&#2369;श"],
+           answer:3,
+           
+       },
+       {
+           q:"Which part restrict incorrect loading of component in jig? | ज&#2367;ग म&#2375;&#2306; क&#2377;म&#2381;प&#2379;न&#2375;न&#2381;ट क&#2375; गलत ल&#2379;ड&#2367;&#2306;ग क&#2379; क&#2380;न स&#2366; ह&#2367;स&#2381;स&#2366; प&#2381;रत&#2367;ब&#2306;ध&#2367;त करत&#2366; ह&#2376;?",
+           options:["A) Clamp | क&#2381;ल&#2376;&#2306;प ","B) Guide plate | ग&#2366;इड प&#2381;ल&#2375;ट ","C) Locating pin | ल&#2379;क&#2375;ट&#2367;&#2306;ग प&#2367;न ","D) Press fit bush | प&#2381;र&#2375;स फ&#2367;ट ब&#2369;श"],
+           answer:2,
+           
+       },
+       
+       {
+           q:"Why the face of pulley is 'Crowned' in power transmission? | प&#2377;वर ट&#2381;र&#2366;&#2306;सम&#2367;शन म&#2375;&#2306; प&#2369;ल&#2368; क&#2366; फ&#2375;स  क&#2381;र&#2366;उन क&#2381;य&#2379;&#2306; ह&#2379;त&#2366; ह&#2376;?",
+           options:["A) Increase the tension | तन&#2366;व बढ&#2364;&#2366;न&#2375; क&#2375; ल&#2367;ए ","B) Decrease the tension | तन&#2366;व कम करन&#2375; क&#2375; ल&#2367;ए ","C) Keep the belt centralized | ब&#2375;ल&#2381;ट क&#2379; क&#2375;&#2306;द&#2381;र&#2368;क&#2371;त रखन&#2375; क&#2375; ल&#2367;ए ","D) Allow the pulley free rotation | प&#2369;ल&#2381;ल&#2368; क&#2379; स&#2381;वत&#2306;त&#2381;र घ&#2370;मन&#2375; क&#2375; ल&#2367;ए"],
+           answer:2,
+           
+       },
+       {
+           q:"Which coupling is used in the place for slight relative movement is required? | अल&#2381;प र&#2367;ल&#2375;ट&#2367;व म&#2370;वम&#2375;&#2306;ट क&#2375; ल&#2367;ए क&#2367;स कपल&#2367;&#2306;ग क&#2366; उपय&#2379;ग क&#2367;य&#2366; ज&#2366;त&#2366; ह&#2376;?",
+           options:["A) Chain coupling | च&#2375;न कपल&#2367;&#2306;ग ","B) B Flange coupling | फ&#2381;ल&#2376;&#2306;ज कपल&#2367;&#2306;ग ","C) Flexible coupling | फ&#2381;ल&#2375;क&#2381;स&#2367;बल कपल&#2367;&#2306;ग ","D) Muff coupling | मफ कपल&#2367;&#2306;ग"],
+           answer:2,
+           
+       },
+       {
+           q:"Which graphical representation of the activities performed during manufacturing? | व&#2367;न&#2367;र&#2381;म&#2366;ण क&#2375; द&#2380;र&#2366;न क&#2368; गई गत&#2367;व&#2367;ध&#2367;य&#2379;&#2306; क&#2366; क&#2380;न स&#2366; आल&#2375;ख&#2368; प&#2381;रत&#2367;न&#2367;ध&#2367;त&#2381;व ह&#2376; ?",
+           options:["A) Job card | ज&#2377;ब क&#2366;र&#2381;ड ","B) Process chart | प&#2381;रक&#2381;र&#2367;य&#2366; च&#2366;र&#2381;ट ","C) Batch record form | ब&#2376;च र&#2367;क&#2377;र&#2381;ड फ&#2377;र&#2381;म ","D) Batch processing form | ब&#2376;च प&#2381;र&#2379;स&#2375;स&#2367;&#2306;ग फ&#2377;र&#2381;म"],
+           answer:1,
+           
+       },
+       {
+           q:"How to improve the gripping property of the dried belt? | स&#2370;ख&#2375; ब&#2375;ल&#2381;ट क&#2368; ग&#2381;र&#2367;प&#2367;&#2306;ग प&#2377;वर क&#2379; क&#2376;स&#2375; स&#2369;ध&#2366;र&#2375;?",
+           options:["A) Jockey pulley | ज&#2377;क&#2368; प&#2369;ल&#2368; ","B) Apply powdered resin | प&#2368;स&#2366; ह&#2369;आ र&#2375;ज&#2367;न लग&#2366;ए&#2306; ","C) Reduce the distance between pulleys | प&#2369;ल&#2368; क&#2375; ब&#2368;च क&#2368; द&#2370;र&#2368; कम कर&#2375;&#2306; ","D) Increase the distance between pulleys | प&#2369;ल&#2368; क&#2375; ब&#2368;च क&#2368; द&#2370;र&#2368; बढ&#2364;&#2366;ए&#2305;"],
+           answer:1,
+           
+       },
+      {
+           q:"What is the name of the gear? | ग&#2367;यर क&#2366; न&#2366;म क&#2381;य&#2366; ह&#2376;?<br /><img src='https://1.bp.blogspot.com/-ATYJB-bYk-k/X4P93y9IhkI/AAAAAAAAGtk/QwsH87wjNQMKt-XH9cbNwS2maGPWmuflwCLcBGAsYHQ/s0/Shot%2B0019.png'>",
+           options:["A) Miter gear | म&#2375;टर ग&#2367;यर ","B) Bevel gear | ब&#2375;वल ग&#2367;यर ","C) Hypoid gear | ह&#2366;इप&#2379;इड ग&#2367;यर ","D) Worm shaft and worm gear | वर&#2381;म श&#2366;फ&#2381;ट और वर&#2381;म ग&#2367;यर"],
+           answer:2,
+           
+       },
+       {
+           q:"Why aluminum is used widely in aircraft industries? | व&#2367;म&#2366;न उद&#2381;य&#2379;ग&#2379;&#2306; म&#2375;&#2306; व&#2381;य&#2366;पक र&#2370;प स&#2375; एल&#2381;य&#2370;म&#2368;न&#2367;यम क&#2366; उपय&#2379;ग क&#2381;य&#2379;&#2306; क&#2367;य&#2366; ज&#2366;त&#2366; ह&#2376;?",
+           options:["A) Light weight | हल&#2381;क&#2366; वजन ","B) Hard and Brittle | ह&#2366;र&#2381;ड और ब&#2381;र&#2367;टल ","C) High tensile strength | उच&#2381;च तन&#2381;यत&#2366; त&#2366;कत ","D) Low thermal conductivity | कम त&#2366;प&#2368;य च&#2366;लकत&#2366;"],
+           answer:0
+,
+           
+       },
+       {
+           q:"Which type of brass sheet is used for deep ore galena? | अयस&#2381;क ग&#2376;ल&#2367;न&#2366; स&#2375; न&#2367;कल&#2366; गय&#2366; ध&#2366;त&#2369; क&#2366; d क&#2381;य&#2366; न&#2366;म ह&#2376;?",
+           options:["A) Tin | ट&#2367;न ","B) Lead | ल&#2368;ड ","C) Copper | त&#2366;&#2306;ब&#2366; ","D) Aluminium | एल&#2381;य&#2369;म&#2368;न&#2367;यम"],
+           answer:2,
+           
+       },
+       {
+           q:"Which metal alloys is used to make friction bearing? | फ&#2381;र&#2367;क&#2381;शन ब&#2367;यर&#2367;&#2306;ग बन&#2366;न&#2375; क&#2375; ल&#2367;ए क&#2367;स म&#2367;श&#2381;र ध&#2366;त&#2369; क&#2366; उपय&#2379;ग क&#2367;य&#2366; ज&#2366;त&#2366; ह&#2376;?",
+           options:["A) Tin | ट&#2367;न ","B) Nickel | न&#2367;कल ","C) Chromium | क&#2381;र&#2379;म&#2367;यम ","D)  Babbitt metal | ब&#2375;ब&#2367;ट म&#2375;टल"],
+           answer:3,
+           
+       },
+       {
+           q:" Which type of bronze metal has got excellent antifriction properties? | क&#2367;स प&#2381;रक&#2366;र क&#2368; क&#2366;&#2306;स&#2381;य ध&#2366;त&#2369; म&#2375;&#2306; उत&#2381;क&#2371;ष&#2381;ट ए&#2306;ट&#2368;फ&#2381;र&#2368;क&#2375;शन ग&#2369;ण प&#2366;ए गए ह&#2376;&#2306;?",
+           options:["A) Low tin bronze | ल&#2379; ट&#2367;न क&#2366;&#2306;स&#2381;य ","B) Leaded bronze | ल&#2375;ड&#2375;ड क&#2366;&#2306;स&#2381;य ","C) Phosphor bronze | फ&#2377;स&#2381;फर ब&#2381;र&#2377;न&#2381;ज&#2364; ","D) Leaded gun metal | ल&#2375;ड&#2375;ड गन ध&#2366;त&#2369;"],
+           answer:2,
+           
+       },
+       {
+           q:"What is the melting point of nickel? | न&#2367;कल क&#2366; गलन&#2366;&#2306;क क&#2381;य&#2366; ह&#2376;?",
+           options:["A) 1300&#176;C","B) 1450&#176;C","C) 1100&#176;C","D) 1950&#176;C"],
+           answer:1,
+           
+       },
+       {
+           q:"What metal is used to make agricultural equipment like ploughs and blades ज&#2376;स&#2375; हल और ब&#2381;ल&#2375;ड बन&#2366;न&#2375; क&#2375; ल&#2367;ए क&#2367;स ध&#2366;त&#2369; क&#2366; उपय&#2379;ग क&#2367;य&#2366; ज&#2366;त&#2366; ह&#2376;?",
+           options:["A) Nickel steel न&#2367;कल स&#2381;ट&#2368;ल ","B) Silicon steel | स&#2367;ल&#2367;क&#2377;न स&#2381;ट&#2368;ल ","C) Chromium steel | क&#2381;र&#2379;म&#2367;यम स&#2381;ट&#2368;ल ","D) Manganese steel | म&#2376;&#2306;गन&#2368;ज स&#2381;ट&#2368;ल"],
+           answer:3,
+           
+       },
+       {
+           q:" What is the name of gauge? | इस ग&#2375;ज क&#2366; न&#2366;म क&#2381;य&#2366; ह&#2376;?<br /><img src='https://1.bp.blogspot.com/-sbHWktGqESQ/X4B3xYYWrnI/AAAAAAAAGiE/0lMKzR4CleUhJIl9tou--hu0hfSADc7lQCLcBGAsYHQ/s0/Shot%2B0008.png'>",
+           options:["A)Pitch gauge | प&#2367;च ग&#2375;ज ","B) Angle gauge | ए&#2306;गल ग&#2375;ज ","C) Feeler gauge | फ&#2368;लर ग&#2375;ज ","D) Radius gauge | त&#2381;र&#2367;ज&#2381;य&#2366; ग&#2375;ज"],
+           answer:3,
+           
+       },
+       {
+           q:" Which gauge is used to check the accuracy of an external thread? | ब&#2366;हर&#2368; च&#2370;ड&#2364;&#2368; क&#2368; सट&#2368;कत&#2366; क&#2368; ज&#2366;&#2306;च करन&#2375; क&#2375; ल&#2367;ए क&#2367;स ग&#2375;ज क&#2366; उपय&#2379;ग क&#2367;य&#2366; ज&#2366;त&#2366; ह&#2376;?",
+           options:["A) Snap gauge | स&#2381;न&#2376;प ग&#2375;ज ","B) Thread ring gauge | थ&#2381;र&#2375;ड र&#2367;&#2306;ग ग&#2375;ज ","C) Thread plug gauge | थ&#2381;र&#2375;ड प&#2381;लग ग&#2375;ज ","D) Centre gauge | स&#2375;&#2306;टर ग&#2375;ज"],
+           answer:3,
+           
+       },
+       {
+           q:" What is the instrument used in measuring external diameter? | ब&#2366;हर&#2368; व&#2381;य&#2366;स क&#2379; म&#2366;पन&#2375; म&#2375;&#2306; क&#2367;स उपकरण क&#2366; उपय&#2379;ग क&#2367;य&#2366; ज&#2366;त&#2366; ह&#2376;?",
+           options:["A) Vernier caliper | वर&#2381;न&#2367;यर क&#2376;ल&#2368;पर&#2381;स ","B) Outside caliper | आउटस&#2366;इड क&#2376;ल&#2367;पर ","C) Parallel leg caliper | प&#2376;र&#2375;लल ल&#2375;ग क&#2376;ल&#2367;पर ","D) Pair of special jaws by using slip gauge | स&#2381;ल&#2367;प ग&#2375;ज क&#2366; उपय&#2379;ग करक&#2375; व&#2367;श&#2375;ष जबड&#2364;&#2375; क&#2368; ज&#2379;ड&#2364;&#2368;"],
+           answer:3,
+           
+       },
+      
+       {
+           q:" Which bearing material has poor thermal conductivity? | क&#2367;स ब&#2367;यर&#2367;&#2306;ग क&#2368; ऊष&#2381;म&#2368;य च&#2366;लकत&#2366; (थर&#2381;मल क&#2366;न&#2381;डक&#2381;ट&#2367;वट&#2368;) कम ह&#2379;त&#2368; ह&#2376; ?",
+           options:["A) Nylon | न&#2366;यल&#2377;न ","B) Teflon | ट&#2375;फ&#2364;ल&#2379;न ","C) Sintered alloys | स&#2367;न&#2381;टर&#2381;ड अल&#2366;ई ","D) Laminated phenolics | ल&#2376;म&#2367;न&#2375;ट&#2375;ड फ&#2375;न&#2379;ल&#2367;क&#2381;स"],
+           answer:3,
+       },
+
+{
+    q:'DC म&#2379;टर म&#2375;&#2306; कम&#2381;य&#2370;ट&#2375;टर क&#2366; म&#2369;ख&#2381;य क&#2366;र&#2381;य ह&#2376;?',
+    options:['AC क&#2379; DC म&#2375;&#2306; बदलन&#2366;','आर&#2381;म&#2375;चर ध&#2366;र&#2366; म&#2375;&#2306; व&#2371;द&#2381;ध&#2367; करन&#2366;','एक सम&#2366;न ट&#2366;र&#2381;क उत&#2381;पन&#2381;न करन&#2366;','आर&#2381;म&#2375;चर प&#2381;रत&#2367;र&#2379;ध कम करन&#2366;'],
+    answer:2
+  }, 
+{
+    q:'DC म&#2379;टर क&#2366; आर&#2381;म&#2375;चर घ&#2370;मत&#2366; ह&#2376; त&#2379; E.M.F. क&#2376;स&#2375; प&#2381;रभ&#2366;व&#2367;त ह&#2379;त&#2366; ह&#2376;?',
+    options:['स&#2381;वय&#2306; प&#2381;र&#2375;र&#2367;त E.M.F.','अन&#2381;य&#2379;न&#2381;य प&#2381;र&#2375;र&#2367;त E.M.F.','ब&#2376;क E.M.F.','क&#2379;ई नह&#2368;&#2306;'],
+    answer:2
+  }, 
+{
+    q:'DC म&#2379;टर क&#2368; गत&#2367; बढ़&#2366;न&#2375; पर ब&#2376;क E.M.F. तथ&#2366; ल&#2366;इन ध&#2366;र&#2366; क&#2381;य&#2366; प&#2381;रभ&#2366;व ह&#2376;?',
+    options:['ब&#2376;क E.M.F. घटत&#2366; ह&#2376;, परन&#2381;त&#2369; ल&#2366;इन ध&#2366;र&#2366; बढ़त&#2368; ह&#2376;&#2404;','ब&#2376;क E.M.F. बढ़त&#2366; ह&#2376;, परन&#2381;त&#2369; ल&#2366;इन ध&#2366;र&#2366; घटत&#2368; ह&#2376;&#2404;','ब&#2376;क E.M.F. व ल&#2366;इन ध&#2366;र&#2366; द&#2379;न&#2379;&#2306; घटत&#2375; ह&#2376;&#2306;&#2404;','ब&#2376;क E.M.F. व ल&#2366;इन ध&#2366;र&#2366; द&#2379;न&#2379;&#2306; बढ़त&#2375; ह&#2376;&#2306;&#2404;'],
+    answer:1
+  }, 
+{
+    q:'न&#2367;म&#2381;न म&#2375;&#2306; स&#2375; क&#2367;स DC म&#2379;टर क&#2368; न&#2379; ल&#2379;ड गत&#2367; उच&#2381;चतम ह&#2376;?',
+    options:['DC स&#2368;र&#2368;ज','DC शण&#2381;ट','कम&#2381;य&#2370;ल&#2375;ट&#2367;व कम&#2381;प&#2366;ण&#2381;ड म&#2379;टर','ड&#2367;फर&#2375;&#2306;श&#2367;यल कम&#2381;प&#2366;उण&#2381;ड म&#2379;टर'],
+    answer:0
+  }, 
+{
+    q:'एक DC श&#2381;र&#2375;ण&#2368; म&#2379;टर क&#2368; घ&#2370;र&#2381;णन द&#2367;श&#2366; क&#2379; क&#2367;स प&#2381;रक&#2366;र पर&#2367;वर&#2381;त&#2367;त क&#2367;य&#2366; ज&#2366; सकत&#2366; ह&#2376;?',
+    options:['सप&#2381;ल&#2366;ई टर&#2381;म&#2367;नल बदलकर','फ&#2368;ल&#2381;ड टर&#2381;म&#2367;नल बदलकर','आर&#2381;म&#2375;चर टर&#2381;म&#2367;नल बदलकर','आर&#2381;म&#2375;चर य&#2366; फ&#2368;ल&#2381;ड टर&#2381;म&#2367;नल बदलकर'],
+    answer:3
+  }, 
+{
+    q:'न&#2367;म&#2381;न म&#2375;&#2306; स&#2375; क&#2367;स ल&#2379;ड क&#2375; ल&#2367;ए उच&#2381;च स&#2381;ट&#2366;र&#2381;ट&#2367;ग ट&#2366;र&#2381;क क&#2368; आवश&#2381;यकत&#2366; ह&#2376;?',
+    options:['ल&#2376;थ मश&#2368;न','अपक&#2375;न&#2381;द&#2381;र&#2368; पम&#2381;प','ल&#2379;क&#2379;म&#2379;ट&#2367;व','एयर ब&#2381;ल&#2379;अर'],
+    answer:2
+  }, 
+{
+    q:'क&#2367;स स&#2366;मग&#2381;र&#2368; स&#2375; DC म&#2379;टर क&#2366; आर&#2381;म&#2375;चर बन&#2366; ह&#2379;त&#2366; ह&#2376;?',
+    options:['स&#2367;ल&#2367;क&#2377;न स&#2381;ट&#2368;ल','म&#2366;इल&#2381;ड स&#2381;ट&#2368;ल','कठ&#2379;र स&#2381;ट&#2368;ल','क&#2366;स&#2381;ट आयरन'],
+    answer:0
+  }, 
+{
+    q:'यद&#2367; चलत&#2375; समय DC शण&#2381;ट म&#2379;टर क&#2366; फ&#2368;ल&#2381;ड क&#2381;यवल ख&#2369;ल ज&#2366;य&#2375; त&#2379; क&#2381;य&#2366; ह&#2379;ग&#2366;?',
+    options:['म&#2379;टरक र&#2370;क ज&#2366;एग&#2368;','म&#2379;टर उच&#2381;च गत&#2367; पर चल&#2375;ग&#2368;','म&#2379;टर न&#2367;म&#2381;न च&#2366;ल पर चल&#2375;ग&#2368;','म&#2379;टर क&#2368; च&#2366;ल प&#2370;र&#2381;ववत&#2381; रह&#2375;ग&#2368;'],
+    answer:1
+  }, 
+{
+    q:'DC म&#2379;टर म&#2375;&#2306; back E.M.F. क&#2367;सक&#2375; अन&#2369;प&#2366;त&#2367;क ह&#2376;?',
+    options:['फ&#2381;लक&#2381;स','गत&#2367;','आर&#2381;म&#2375;चर च&#2366;लक क&#2368; स&#2306;ख&#2381;य&#2366;','उपर&#2379;क&#2381;त सभ&#2368;'],
+    answer:3
+  }, 
+{
+    q:'स&#2368;र&#2368;ज फ&#2368;ल&#2381;ड ड&#2366;इवर&#2381;टर गत&#2367; न&#2367;य&#2306;त&#2381;रण व&#2367;ध&#2367; म&#2369;ख&#2381;य र&#2370;प स&#2375; क&#2367;सम&#2375;&#2306; प&#2381;रय&#2379;ग क&#2368; ज&#2366;त&#2368; ह&#2376;?',
+    options:['DC स&#2368;र&#2368;ज म&#2379;टर','DC शण&#2381;ट म&#2379;टर','Differential क&#2306;प&#2366;उ&#2306;ड म&#2379;टर','Cumulative क&#2306;प&#2366;उ&#2306;ड म&#2379;टर'],
+    answer:1
+  }, 
+{
+    q:'DC स&#2368;र&#2368;ज म&#2379;टर, इल&#2375;क&#2381;ट&#2381;र&#2367;क ट&#2381;र&#2375;क&#2381;शन क&#2375; ल&#2367;ए सबस&#2375; उपय&#2369;क&#2381;त ह&#2376;, क&#2381;य&#2379;&#2306;क&#2367;-',
+    options:['इसक&#2366; स&#2381;ट&#2366;र&#2381;ट&#2367;&#2306;ग ट&#2366;र&#2381;क उच&#2381;च ह&#2376;','यह ज&#2381;य&#2366;द&#2366; सस&#2381;त&#2366; ह&#2376;&#2404;','यह बह&#2369;त त&#2375;ज चलत&#2366; ह&#2376;&#2404;','उपर&#2379;क&#2381;त सभ&#2368;'],
+    answer:0
+  }, 
+{
+    q:'DC मश&#2368;न म&#2375;&#2306; 32 क&#2381;व&#2366;यल ह&#2376;&#2404; कम&#2381;य&#2370;ट&#2375;टर स&#2375;गम&#2375;&#2306;ट&#2379;&#2306; क&#2368; स&#2306;ख&#2381;य&#2366; ह&#2379;ग&#2368;?',
+    options:['32','18','64','40'],
+    answer:0
+  }, 
+{
+    q:'न&#2367;म&#2381;न म&#2375;&#2306; स&#2375; क&#2367;स म&#2379;टर क&#2366; स&#2381;ट&#2366;र&#2381;ट&#2367;ग ट&#2366;र&#2381;क, सम&#2366;न HP र&#2375;ट&#2367;ग तथ&#2366; फ&#2369;ल ल&#2379;ड पर स&#2381;प&#2368;ड क&#2375; ल&#2367;ए खर&#2366;ब ह&#2379;त&#2366; ह&#2376;?',
+    options:['स&#2368;र&#2368;ज म&#2379;टर','ड&#2367;फर&#2375;&#2306;श&#2367;यल कम&#2381;प&#2366;उण&#2381;ड म&#2379;टर','शण&#2381;ट म&#2379;टर','कम&#2381;य&#2370;ल&#2375;ट&#2367;व कम&#2381;प&#2366;उण&#2381;ड म&#2379;टर'],
+    answer:1
+  }, 
+{
+    q:'न&#2367;म&#2381;न म&#2375;&#2306; स&#2375; क&#2367;स DC म&#2379;टर क&#2379; सद&#2376;व ब&#2367;न&#2366; ल&#2379;ड क&#2375; च&#2366;ल&#2370; क&#2367;य&#2366; ज&#2366;त&#2366; ह&#2376;?',
+    options:['स&#2368;र&#2368;ज म&#2379;टर','शण&#2381;ट म&#2379;टर','ड&#2367;फर&#2375;&#2306;श&#2367;यल&#2368; कम&#2381;प&#2366;उण&#2381;ड म&#2379;टर','कम&#2381;य&#2370;ल&#2375;ट&#2367;व कम&#2381;प&#2366;उण&#2381;ड म&#2379;टर'],
+    answer:1
+  }, 
+{
+    q:'DC म&#2379;टर क&#2375; आर&#2381;म&#2375;चर म&#2375;&#2306; बहत&#2368; ह&#2369;ई ध&#2366;र&#2366; न&#2367;म&#2381;न म&#2375;&#2306; स&#2375; क&#2367;सक&#2375; सम&#2366;न&#2369;प&#2366;त&#2367;क ह&#2379;त&#2368; ह&#2376;?',
+    options:['म&#2379;टर क&#2368; गत&#2367;','आप&#2375;क&#2381;ष&#2367;त बल&#2366;घ&#2370;र&#2381;ण','आर&#2381;म&#2375;चर प&#2381;रत&#2367;र&#2379;ध','टर&#2381;म&#2367;नल&#2379; पर व&#2379;ल&#2381;टत&#2366;'],
+    answer:1
+  }, 
+{
+    q:'न&#2367;म&#2381;न म&#2375;&#2306; स&#2375; क&#2367;स क&#2366;रण स&#2375; DC म&#2379;टर क&#2368; ब&#2381;र&#2369;श स&#2375; च&#2376;टर&#2367;&#2306;ग य&#2366; ह&#2367;स&#2381;स&#2367;&#2306;ग स&#2366;उ&#2306;ड न&#2367;कलत&#2368; ह&#2376;?',
+    options:['अध&#2367;क ल&#2379;ड','अपर&#2381;य&#2366;प&#2381;त ब&#2381;र&#2369;श तन&#2366;व','गलत ब&#2381;र&#2369;श दब&#2366;व','कम&#2381;य&#2370;ट&#2375;टर स&#2375;गम&#2375;ट म&#2375;&#2306; श&#2366;र&#2381;ट सर&#2381;क&#2367;ट'],
+    answer:2
+  }, 
+{
+    q:'न&#2367;म&#2381;न म&#2375;&#2306; स&#2375; क&#2367;स DC म&#2379;टर क&#2375; स&#2366;थ 3 प&#2381;व&#2366;इ&#2306;ट स&#2381;ट&#2366;र&#2381;टर क&#2366; प&#2381;रय&#2379;ग क&#2367;य&#2366; ज&#2366;त&#2366; ह&#2376;?',
+    options:['स&#2368;र&#2368;ज','शण&#2381;ट','कम&#2381;प&#2366;उण&#2381;ड','शण&#2381;ट व कम&#2381;प&#2366;उण&#2381;ड द&#2379;न&#2379;&#2306;'],
+    answer:3
+  }, 
+{
+    q:'DC म&#2379;टर म&#2375;&#2306; स&#2381;ट&#2366;र&#2381;टर क&#2366; म&#2369;ख&#2381;य उद&#2381;द&#2375;श&#2381;य ह&#2376;?',
+    options:['आर&#2381;म&#2375;चर गत&#2367; बढ़&#2366;न&#2366;','आर&#2381;म&#2375;चर ध&#2366;र&#2366; स&#2368;म&#2367;त करन&#2366;','आर&#2381;म&#2375;चर गत&#2367; कम करन&#2366;','आर&#2381;म&#2375;चर फ&#2381;लक&#2381;स म&#2375;&#2306; व&#2371;द&#2381;ध&#2367; करन&#2366;'],
+    answer:1
+  }, 
+{
+    q:'यद&#2367; एक DC म&#2379;टर क&#2379; AC सप&#2381;ल&#2366;ई स&#2375; ज&#2379;ड़ द&#2375;न&#2375; पर क&#2381;य&#2366; ह&#2379;ग&#2366;?',
+    options:['म&#2379;टर नह&#2368;&#2306; चल&#2375;ग&#2368;','म&#2379;टर स&#2366;म&#2366;न&#2381;य गत&#2367; पर चल&#2375;ग&#2368;','म&#2379;टर क&#2368; गत&#2367; कम ह&#2379;ग&#2368;','एड&#2381;ड&#2368; कर&#2306;ट क&#2375; क&#2366;रण उत&#2381;पन&#2381;न ऊष&#2381;म&#2366; स&#2375; फ&#2368;ल&#2381;ड क&#2381;यवल जल ज&#2366;एग&#2368;|'],
+    answer:3
+  }, 
+{
+    q:'DC मश&#2368;न म&#2375;&#2306; आर&#2381;म&#2375;चर क&#2377;पर ल&#2377;स क&#2367;सक&#2375; सम&#2366;&#2306;न&#2369;प&#2366;त&#2367;क ह&#2376;?',
+    options:['ल&#2379;ड कर&#2306;ट','ल&#2379;ड कर&#2306;ट2','1/ल&#2379;ड कर&#2306;ट','1/ल&#2379;ड कर&#2306;ट2'],
+    answer:1
+  } 
+ ]
+
+
+ const questionNumber = document.querySelector(".question-number");
+ const questionText = document.querySelector(".question-text");
+ const optionContainer = document.querySelector(".option-container");
+ const answersIndicatorContainer = document.querySelector(".answers-indicator");
+ const homeBox = document.querySelector(".home-box");
+ const quizBox = document.querySelector(".quiz-box");
+ const resultBox = document.querySelector(".result-box");
+
+ let questionCounter = 0;
+ let currentQuestion;
+ let availableQuestions = [];
+ let availableOptions = [];
+ let correctAnswers = 0;
+ let attempt = 0;
+
+ // push the questions into  availableQuestions Array
+ function setAvailableQuestions(){
+    const totalQuestion = quiz.length;
+    for(let i=0; i<totalQuestion; i++){
+      availableQuestions.push(quiz[i])
+    }
+ }
+ 
+ // set question number and question and options
+ function getNewQuestion(){
+    // set question number 
+    questionNumber.innerHTML = "Question " + (questionCounter + 1) + " of " + quiz.length;
+
+    // set question text
+    // get random question
+    const questionIndex = availableQuestions[Math.floor(Math.random() * availableQuestions.length)]
+    currentQuestion = questionIndex;
+    questionText.innerHTML = currentQuestion.q;
+    // get the position of 'questionIndex' from the availableQuestion Array
+    const index1= availableQuestions.indexOf(questionIndex);
+    // remove the 'questionIndex' from the availableQuestion Array, so that the question does not repeat
+    availableQuestions.splice(index1,1);
+     console.log(availableQuestions)     
+    // set options
+    // get the length of options
+    const optionLen = currentQuestion.options.length
+    // push options into availableOptions Array
+    for(let i=0; i<optionLen; i++){
+       availableOptions.push(i)
+    }
+    optionContainer.innerHTML = '';
+    let animationDelay = 0.15;
+    // create options in html
+    for(let i=0; i<optionLen; i++){
+       // random option
+       const optonIndex = availableOptions[Math.floor(Math.random() * availableOptions.length)];
+       // get the position of 'optonIndex' from the availableOptions Array
+       const index2 =  availableOptions.indexOf(optonIndex);
+       // remove the  'optonIndex' from the availableOptions Array , so that the option does not repeat
+       availableOptions.splice(index2,1);
+       const option = document.createElement("div");
+       option.innerHTML = currentQuestion.options[optonIndex];
+       option.id = optonIndex;
+       option.style.animationDelay =animationDelay + 's';
+       animationDelay = animationDelay + 0.15;
+       option.className = "option";
+       optionContainer.appendChild(option)
+       option.setAttribute("onclick","getResult(this)");
+    }
+
+    questionCounter++
+ }
+
+ // get the result of current attempt question
+ function getResult(element){
+     const id = parseInt(element.id);
+     // get the answer by comparing the id of clicked option
+     if(id === currentQuestion.answer){
+      // set the green color to the correct option
+      element.classList.add("correct");
+      // add the indicator to correct mark
+      updateAnswerIndicator("correct");
+      correctAnswers++;
+     }
+     else{
+      // set the red color to the incorrect option
+      element.classList.add("wrong");
+      // add the indicator to wrong mark
+      updateAnswerIndicator("wrong");
+
+        // if the answer is incorrect then show the correct option by adding green color the correct option
+        const optionLen = optionContainer.children.length;
+        for(let i=0; i<optionLen; i++){
+          if(parseInt(optionContainer.children[i].id) === currentQuestion.answer){
+              optionContainer.children[i].classList.add("correct");     
+          }
+        }   
+       
+     }
+   attempt++;
+   unclickableOptions();
+ }
+ 
+ // make all the options unclickable once the user select a option (RESTRICT THE USER TO CHANGE THE OPTION AGAIN)
+ function unclickableOptions(){
+    const optionLen = optionContainer.children.length;
+    for(let i=0 ; i<optionLen; i++){
+      optionContainer.children[i].classList.add("already-answered");
+    }
+ }
+ 
+ function answersIndicator(){
+    answersIndicatorContainer.innerHTML = '';
+    const totalQuestion = quiz.length;
+    for(let i=0; i<totalQuestion; i++){
+        const indicator = document.createElement("div");
+         answersIndicatorContainer.appendChild(indicator);
+    }
+ }
+ function updateAnswerIndicator(markType){
+     answersIndicatorContainer.children[questionCounter-1].classList.add(markType)
+ }
+
+ function next(){
+   if(questionCounter === quiz.length){
+      quizOver();
+   }
+   else{
+     getNewQuestion();
+   }
+ }
+
+ function quizOver(){
+  // hide quiz Box
+  quizBox.classList.add("hide");
+  // show result Box
+  resultBox.classList.remove("hide");
+    quizResult();
+ }
+ // get the quiz Result
+ function quizResult(){
+   resultBox.querySelector(".total-question").innerHTML = quiz.length;
+   resultBox.querySelector(".total-attempt").innerHTML = attempt;
+   resultBox.querySelector(".total-correct").innerHTML = correctAnswers;
+   resultBox.querySelector(".total-wrong").innerHTML = attempt - correctAnswers;
+   const percentage = (correctAnswers/quiz.length)*100;
+   resultBox.querySelector(".percentage").innerHTML =percentage.toFixed(2) + "%";
+   resultBox.querySelector(".total-score").innerHTML =correctAnswers +" / " + quiz.length;
+ }
+
+ function resetQuiz(){
+    questionCounter = 0;
+    correctAnswers = 0;
+    attempt = 0;
+ }
+
+ function tryAgainQuiz(){
+   // hide the resultBox
+   resultBox.classList.add("hide");
+   // show the quizBox
+   quizBox.classList.remove("hide");
+     resetQuiz();
+     startQuiz();
+ }
+
+ function goToHome(){
+  // hide result Box
+  resultBox.classList.add("hide");
+  // show home box
+  homeBox.classList.remove("hide");
+  resetQuiz();
+ }
+ 
+ // #### STARTING POINT ####
+
+ function startQuiz(){
+    
+     // hide home box 
+     homeBox.classList.add("hide");
+     // show quiz Box
+     quizBox.classList.remove("hide");
+    // first we will set all questions in availableQuestions Array
+    setAvailableQuestions();
+    // second we will call getNewQuestion(); function
+    getNewQuestion();
+    // to create indicator of answers
+    answersIndicator();
+
+ }
+
+
+window.onload = function (){
+  homeBox.querySelector(".total-question").innerHTML = quiz.length;
+}
+
+
+</script>
